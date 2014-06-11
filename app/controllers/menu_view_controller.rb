@@ -46,7 +46,7 @@ class MenuViewController < UIViewController
   end
 
   def tableView(tableView, heightForRowAtIndexPath:path)
-    30
+    34
   end
   
   def tableView(tableView, heightForHeaderInSection:section)
@@ -66,9 +66,9 @@ class MenuViewController < UIViewController
   end 
   
   def tableView(tableView, cellForRowAtIndexPath:path)
-    item = @menu[path.section][:items][path.row][:menu]
+    item = @menu[path.section][:items][path.row]
     cell = tableView.dequeueReusableCellWithIdentifier(MenuCell.name)
-    cell.populate(item)
+    cell.populate(item[:menu])
     if @first_appearance
       @first_appearance = false
       tableView.selectRowAtIndexPath(path, animated:false, scrollPosition:UITableViewScrollPositionTop)

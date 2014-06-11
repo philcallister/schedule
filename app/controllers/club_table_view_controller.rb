@@ -25,9 +25,12 @@ class ClubTableViewController < UITableViewController
 
   def prepareForSegue(segue, sender:sender)
     vc = segue.destinationViewController
-
     case segue.identifier
     when 'LocationSegue'
+      vc.club = self.club
+    when 'ProgramSegue'
+      vc.club = self.club
+    when 'AmenitySegue'
       vc.club = self.club
     end
   end
@@ -53,7 +56,7 @@ class ClubTableViewController < UITableViewController
     when 0
       return 2
     when 1
-      return 3
+      return 4
     when 2
       return 1
     end
@@ -91,7 +94,9 @@ class ClubTableViewController < UITableViewController
       when 1
         cell.populate('Programs')
       when 2
-        cell.populate('Amenities & Hours')
+        cell.populate('Amenities')
+      when 3
+        cell.populate('Hours')
       end
     when 2
       cell = tableView.dequeueReusableCellWithIdentifier(ClubLinkCell.name)
@@ -122,6 +127,12 @@ class ClubTableViewController < UITableViewController
       case path.row
       when 0
         self.performSegueWithIdentifier("ScheduleSegue", sender:self)
+      when 1
+        self.performSegueWithIdentifier("ProgramSegue", sender:self)
+      when 2
+        self.performSegueWithIdentifier("AmenitySegue", sender:self)
+      when 3
+        self.performSegueWithIdentifier("HourSegue", sender:self)
       end
     when 2
       place = MKPlacemark.alloc.initWithCoordinate(CLLocationCoordinate2DMake(self.club.location[0], self.club.location[1]), addressDictionary: nil)
