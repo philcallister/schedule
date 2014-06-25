@@ -6,7 +6,7 @@ class AppDelegate
 
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     #TestFlight.takeOff("acde9e93-d73e-44b5-86e7-18c2070ddc29")
-    application.setStatusBarStyle(UIStatusBarStyleLightContent)
+    #application.setStatusBarStyle(UIStatusBarStyleDarkContent)
     GMSServices.provideAPIKey(GOOGLE_MAP_API_KEY)
     true
   end

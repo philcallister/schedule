@@ -16,7 +16,7 @@ Motion::Project::App.setup do |app|
   app.info_plist['UIMainStoryboardFile'] = 'MainStoryboard'
   app.interface_orientations = [:portrait]
   app.prerendered_icon = false
-  app.info_plist['UIViewControllerBasedStatusBarAppearance'] = false
+  #app.info_plist['UIViewControllerBasedStatusBarAppearance'] = false
 
   app.vendor_project('vendor/GoogleMaps.framework',
     :static,
