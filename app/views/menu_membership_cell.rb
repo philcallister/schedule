@@ -1,4 +1,4 @@
-class MenuCell < UITableViewCell
+class MenuMembershipCell < UITableViewCell
 
   include CellSelectable
 
@@ -10,6 +10,10 @@ class MenuCell < UITableViewCell
   def populate(menu)
     self.menu.text = menu
     self.selectColor([self.menu])
+  end
+
+  def layoutSubviews
+    super
   end
   
 end

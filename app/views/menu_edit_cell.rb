@@ -1,4 +1,4 @@
-class MenuCell < UITableViewCell
+class MenuEditCell < UITableViewCell
 
   include CellSelectable
 

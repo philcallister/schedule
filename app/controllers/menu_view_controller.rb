@@ -2,31 +2,27 @@ class MenuViewController < UIViewController
 
   def viewDidLoad
     super
-    @first_appearance = true
-
     @menu ||= [ { :group => 'CLUBS', :items => [
-                  { :menu => 'Chanhassen', :club_id => 0, :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => false },
-                  { :menu => 'Lakeville', :club_id => 1, :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => false },
-                  { :menu => 'Eden Prairie', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => false },
-                  { :menu => 'Woodbury', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => false } ]
+                  { :menu => 'Edit Clubs...', :edit => true, :func => :modal_view, :params => { :id => 'ClubsEditSegue'}, :deselect => true },
+                  { :menu => 'Chanhassen', :club_id => 0, :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
+                  { :menu => 'Lakeville', :club_id => 1, :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
+                  { :menu => 'Eden Prairie', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
+                  { :menu => 'Woodbury', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true } ]
                 },
 
                 { :group => 'ACTIVITIES', :items => [
-                  { :menu => 'Zumba', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => false },
-                  { :menu => 'CRT', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => false },
-                  { :menu => 'Strictly Strength', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => false },
-                  { :menu => 'Core', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => false } ]
+                  { :menu => 'Edit Activities...', :edit => true, :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
+                  { :menu => 'Zumba', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
+                  { :menu => 'CRT', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
+                  { :menu => 'Strictly Strength', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
+                  { :menu => 'Core', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true } ]
                 },
 
                 { :group => 'MEMBERSHIP', :items => [
-                  { :menu => 'Reservations', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => false },
-                  { :menu => 'Account', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => false },
-                  { :menu => 'Card', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => false } ]
-                },
-
-                { :group => 'PROFILE', :items => [
-                  { :menu => 'Settings', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => false },
-                  { :menu => 'Logout', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => false } ]
+                  { :menu => 'Reservations', :membership => true, :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
+                  { :menu => 'Account', :membership => true, :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
+                  { :menu => 'Card', :membership => true, :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
+                  { :menu => 'Logout', :membership => true, :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true } ]
                 }
               ]
 
@@ -46,7 +42,7 @@ class MenuViewController < UIViewController
   end
 
   def tableView(tableView, heightForRowAtIndexPath:path)
-    34
+    44
   end
   
   def tableView(tableView, heightForHeaderInSection:section)
@@ -67,11 +63,16 @@ class MenuViewController < UIViewController
   
   def tableView(tableView, cellForRowAtIndexPath:path)
     item = @menu[path.section][:items][path.row]
-    cell = tableView.dequeueReusableCellWithIdentifier(MenuCell.name)
-    cell.populate(item[:menu])
-    if @first_appearance
-      @first_appearance = false
-      tableView.selectRowAtIndexPath(path, animated:false, scrollPosition:UITableViewScrollPositionTop)
+    cell = nil
+    if item[:membership]
+      cell = tableView.dequeueReusableCellWithIdentifier(MenuMembershipCell.name)
+      cell.populate(item[:menu])
+    elsif item[:edit]
+      cell = tableView.dequeueReusableCellWithIdentifier(MenuEditCell.name)
+      cell.populate(item[:menu])
+    else
+      cell = tableView.dequeueReusableCellWithIdentifier(MenuCell.name)
+      cell.populate(item[:menu])
     end
     
     cell
@@ -112,6 +113,10 @@ class MenuViewController < UIViewController
 
   ############################################################################
   # Internal
+
+  def modal_view(params, club=nil)
+    self.performSegueWithIdentifier(params[:id], sender:self)
+  end
 
   def display_view(params, club=nil)
     newTopViewController = self.storyboard.instantiateViewControllerWithIdentifier(params[:id])
