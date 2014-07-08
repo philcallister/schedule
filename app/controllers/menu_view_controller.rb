@@ -4,10 +4,10 @@ class MenuViewController < UIViewController
     super
     @menu ||= [ { :group => 'CLUBS', :items => [
                   { :menu => 'Edit Clubs...', :edit => true, :func => :modal_view, :params => { :id => 'ClubsEditSegue'}, :deselect => true },
-                  { :menu => 'Chanhassen', :club_id => 0, :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
-                  { :menu => 'Lakeville', :club_id => 1, :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
-                  { :menu => 'Eden Prairie', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
-                  { :menu => 'Woodbury', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true } ]
+                  { :menu => 'Chanhassen, MN', :club_id => 0, :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
+                  { :menu => 'Lakeville, MN', :club_id => 1, :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
+                  { :menu => 'Eden Prairie, MN', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true },
+                  { :menu => 'Woodbury, MN', :func => :display_view, :params => { :id => 'InitialNavigation'}, :deselect => true } ]
                 },
 
                 { :group => 'ACTIVITIES', :items => [

@@ -7,6 +7,7 @@ resources/*.momd
 resources/*.storyboardc
 ib.xcodeproj
 vendor/Pods
+vendor/**/build*
 .DS_Store
 nbproject
 .redcar

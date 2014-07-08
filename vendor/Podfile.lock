@@ -1,7 +1,27 @@
 PODS:
+  - AFNetworking (2.2.4):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.2.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.2.4):
+    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (2.2.4)
+  - AFNetworking/Security (2.2.4)
+  - AFNetworking/Serialization (2.2.4)
+  - AFNetworking/UIKit (2.2.4):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
   - ECSlidingViewController (1.3.2)
 
 DEPENDENCIES:
+  - AFNetworking (~> 2.2.4)
   - ECSlidingViewController (from `https://raw.githubusercontent.com/ECSlidingViewController/ECSlidingViewController/1.3.2/ECSlidingViewController.podspec`)
 
 EXTERNAL SOURCES:
@@ -9,6 +29,7 @@ EXTERNAL SOURCES:
     :podspec: https://raw.githubusercontent.com/ECSlidingViewController/ECSlidingViewController/1.3.2/ECSlidingViewController.podspec
 
 SPEC CHECKSUMS:
+  AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
   ECSlidingViewController: 4c84051df45c086f379eba4b0e8cf4e7cc53ba6a
 
-COCOAPODS: 0.22.3
+COCOAPODS: 0.33.1

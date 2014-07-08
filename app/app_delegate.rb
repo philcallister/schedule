@@ -8,6 +8,10 @@ class AppDelegate
     #TestFlight.takeOff("acde9e93-d73e-44b5-86e7-18c2070ddc29")
     application.setStatusBarStyle(UIStatusBarStyleLightContent)
     GMSServices.provideAPIKey(GOOGLE_MAP_API_KEY)
+
+    # load up the clubs here so they'll be available
+    Club.force_load
+    
     true
   end
 

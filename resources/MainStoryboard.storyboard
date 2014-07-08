@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="78a-yj-Zzn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="78a-yj-Zzn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -55,7 +55,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="I0H-pK-r1b">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.92549026010000002" green="0.9450981021" blue="0.96470594409999999" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="separatorColor" red="0.8445925151" green="0.84051235800000001" blue="0.84867267219999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MenuGroupCell" rowHeight="24" id="MXx-gH-1gD" customClass="MenuGroupCell">
@@ -199,24 +199,58 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Edit Clubs" id="LS3-Zd-HUz">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="5HE-TV-pLt">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="WQU-U8-qRA">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <action selector="addPressed" destination="WYR-Ii-NHV" id="y7X-ag-1fV"/>
+                                                <action selector="donePressed" destination="WYR-Ii-NHV" id="WAu-mn-GOl"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="NXL-Rj-lW1">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="5HE-TV-pLt">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <action selector="donePressed" destination="WYR-Ii-NHV" id="VHB-MU-IQM"/>
+                                                <segue destination="u4F-db-nN8" kind="modal" identifier="ClubEditAddSegue" modalTransitionStyle="coverVertical" id="coL-Rl-hWe"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wze-HK-WdV">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.92549026010000002" green="0.9450981021" blue="0.96470594409999999" alpha="1" colorSpace="deviceRGB"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" showsReorderControl="YES" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MenuEditClubCell" id="WNm-9d-ZD1" customClass="MenuEditClubCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WNm-9d-ZD1" id="UOs-uI-2Jv">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Club Item" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7H-HP-g8y">
+                                                    <rect key="frame" x="20" y="7" width="280" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                    <color key="textColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="menu" destination="d7H-HP-g8y" id="5ez-ds-RTv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="WYR-Ii-NHV" id="Adr-ze-mWO"/>
+                                    <outlet property="delegate" destination="WYR-Ii-NHV" id="all-bb-HtC"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.36078432199999999" green="0.56078433989999998" blue="0.72941178080000002" alpha="1" colorSpace="deviceRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="table" destination="wze-HK-WdV" id="bl6-8t-5gw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nkh-fi-5Yb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -229,7 +263,7 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="CpU-lK-oyp">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.85490202903747559" green="0.88627457618713379" blue="0.92549026012420654" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.92549026010000002" green="0.9450981021" blue="0.96470594409999999" alpha="1" colorSpace="deviceRGB"/>
                         <color key="separatorColor" red="0.8445925151" green="0.84051235800000001" blue="0.84867267219999998" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" showsReorderControl="YES" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="ClubGroupCell" rowHeight="75" id="P2x-7K-aZk" customClass="ClubGroupCell">
@@ -377,7 +411,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="QfJ-CU-nK9">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="addPressed:" destination="cde-t1-Tj2" id="hl7-ve-MLI"/>
+                                <segue destination="u4F-db-nN8" kind="modal" identifier="ClubAddSegue" modalTransitionStyle="coverVertical" id="IUY-1G-3g3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -393,6 +427,94 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NET-Bc-Nxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3492" y="-4769"/>
+        </scene>
+        <!--Club Add View Controller-->
+        <scene sceneID="Cpo-uo-ui3">
+            <objects>
+                <viewController storyboardIdentifier="ClubAddView" id="u4F-db-nN8" customClass="ClubAddViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZgL-SV-Voj"/>
+                        <viewControllerLayoutGuide type="bottom" id="LNH-gJ-EPo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Jos-T0-Lad">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YgC-aY-ysD">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" red="0.36078432199999999" green="0.56078433989999998" blue="0.72941178080000002" alpha="1" colorSpace="deviceRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Add Club" id="M98-Dm-9J6">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="GPh-Zu-Nx6">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="donePressed" destination="u4F-db-nN8" id="69q-b7-KJ2"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5XM-lk-2Ap">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.92549026010000002" green="0.9450981021" blue="0.96470594409999999" alpha="1" colorSpace="deviceRGB"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ClubAddCell" id="AhG-Bx-Ur0" customClass="ClubAddCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AhG-Bx-Ur0" id="m3b-YN-X7W">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Club Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8f9-5C-suu">
+                                                    <rect key="frame" x="20" y="2" width="228" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" red="0.36078432199999999" green="0.56078433989999998" blue="0.72941178080000002" alpha="1" colorSpace="deviceRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Club Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LN7-hL-Ee9">
+                                                    <rect key="frame" x="20" y="20" width="228" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXXX Miles" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojb-c5-WqY">
+                                                    <rect key="frame" x="251" y="13" width="60" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="distance" destination="Ojb-c5-WqY" id="yeL-n5-9Wq"/>
+                                            <outlet property="name" destination="8f9-5C-suu" id="VeN-2f-yLY"/>
+                                            <outlet property="type_description" destination="LN7-hL-Ee9" id="P9Y-DS-M23"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="u4F-db-nN8" id="r2V-d1-ikm"/>
+                                    <outlet property="delegate" destination="u4F-db-nN8" id="fRA-17-jBn"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.36078432199999999" green="0.56078433989999998" blue="0.72941178080000002" alpha="1" colorSpace="deviceRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="table" destination="5XM-lk-2Ap" id="sgt-f3-gJ0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gnp-hC-cCL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3023" y="-4769"/>
         </scene>
         <!--Schedule View Controller - Today-->
         <scene sceneID="9fP-ra-dvN">
@@ -416,7 +538,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="s2h-8L-0Sg">
                                 <rect key="frame" x="0.0" y="29" width="320" height="431"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.85490202900000001" green="0.88627457620000005" blue="0.92549026010000002" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.92549026010000002" green="0.9450981021" blue="0.96470594409999999" alpha="1" colorSpace="deviceRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ScheduleGroupCell" rowHeight="24" id="T13-D2-I2R" customClass="ScheduleGroupCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="24"/>
@@ -575,7 +697,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQZ-Lb-lO5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3026" y="-4089"/>
+            <point key="canvasLocation" x="-3023" y="-3305"/>
         </scene>
         <!--Program View Controller - Programs-->
         <scene sceneID="kWb-Wz-YmQ">
@@ -643,7 +765,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebS-TF-VLt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3023" y="-3378"/>
+            <point key="canvasLocation" x="-3020" y="-2594"/>
         </scene>
         <!--Amenity View Controller - Amenities-->
         <scene sceneID="vQ6-yM-x7B">
@@ -716,7 +838,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Y2-0h-Ldj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3023" y="-2671"/>
+            <point key="canvasLocation" x="-3020" y="-1887"/>
         </scene>
         <!--Hour View Controller - Hours-->
         <scene sceneID="DFr-eE-GJ1">
@@ -817,7 +939,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q9x-3Z-7BH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3023" y="-1979"/>
+            <point key="canvasLocation" x="-3020" y="-1195"/>
         </scene>
         <!--View Controller - TCX-->
         <scene sceneID="4Rr-P2-bYf">
@@ -850,7 +972,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sHp-Gq-1HU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2574" y="-4089"/>
+            <point key="canvasLocation" x="-2571" y="-3305"/>
         </scene>
         <!--Map View Controller - Location-->
         <scene sceneID="dln-IP-Xrb">
@@ -871,7 +993,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I7S-lT-ccv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3023" y="-4769"/>
+            <point key="canvasLocation" x="-3020" y="-3985"/>
         </scene>
         <!--Initial Navigation Controller-->
         <scene sceneID="ShT-RB-TLC">
@@ -909,5 +1031,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="JJX-aV-RcK"/>
+        <segue reference="coL-Rl-hWe"/>
     </inferredMetricsTieBreakers>
 </document>
