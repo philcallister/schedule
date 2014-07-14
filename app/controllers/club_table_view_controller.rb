@@ -9,6 +9,10 @@ class ClubTableViewController < UITableViewController
 
   def viewDidLoad
     super
+
+    if self.club.nil?
+      Club.find_by_id(11) { |c| self.club = c }
+    end
   end
 
   def viewWillAppear(animated)

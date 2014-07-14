@@ -3,6 +3,7 @@ class MapViewController < UIViewController
   attr_accessor :club
 
   def loadView
+    super
     camera = GMSCameraPosition.cameraWithLatitude(self.club.location[0], longitude: self.club.location[1], zoom: 15)
     @map_view = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
     @map_view.myLocationEnabled = true

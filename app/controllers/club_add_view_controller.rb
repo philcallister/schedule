@@ -7,9 +7,9 @@ class ClubAddViewController < UIViewController
 
   def viewDidLoad
     super
-
     Club.all_by_name { |clubs| @clubs = clubs }
- 
+    @filtered_clubs = []
+
     if (CLLocationManager.locationServicesEnabled)
       @location_manager = CLLocationManager.alloc.init
       @location_manager.desiredAccuracy = KCLLocationAccuracyKilometer 
@@ -37,8 +37,24 @@ class ClubAddViewController < UIViewController
 
   def locationManager(manager, didFailWithError:error) 
     puts("!!!!! Location not enabled (#{error})") 
-  end 
-   
+  end
+
+
+  ############################################################################
+  # Search Delegate
+
+  # def filterContentForSearchText(searchText, scope:scope)
+  #   puts "!!!!! filterContentForSearchText"
+  #   # resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", searchText];
+  #   # searchResults = [recipes filteredArrayUsingPredicate:resultPredicate];
+  # end
+
+  def searchDisplayController(controller, shouldReloadTableForSearchString:searchString)
+    @filtered_clubs = @clubs.select { |c| c.club_name_full.downcase.match(searchString.downcase) }
+    return true
+  end
+
+
   ############################################################################
   # Table Delegate
 
@@ -47,19 +63,29 @@ class ClubAddViewController < UIViewController
   end
 
   def tableView(tableView, numberOfRowsInSection:section)
-    @clubs.length
+    if tableView == self.searchDisplayController.searchResultsTableView
+      return @filtered_clubs.length
+    else
+      return @clubs.length
+    end
   end
 
   def tableView(tableView, cellForRowAtIndexPath:path)
-    item = @clubs[path.row]
-    cell = tableView.dequeueReusableCellWithIdentifier(ClubAddCell.name)
+    item = nil
+    if tableView == self.searchDisplayController.searchResultsTableView
+      item = @filtered_clubs[path.row]
+    else
+      item = @clubs[path.row]
+    end
+    cell = self.table.dequeueReusableCellWithIdentifier(ClubAddCell.name)
+
     miles = nil
     if @current_location
       miles = item.distance_from_formatted(@current_location)
     else
       miles = "Loading..."
     end
-    cell.populate("#{item.name}, #{item.state}", item.type_description, miles)
+    cell.populate(item.club_name_full, item.type_description, miles)
     cell
   end
 

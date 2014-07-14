@@ -1,6 +1,6 @@
 class Club #< MotionDataWrapper::Model
   
-  @@clubs = []
+  @@clubs_all = []
 
   # type
   # name
@@ -24,14 +24,14 @@ class Club #< MotionDataWrapper::Model
 
   def self.all_by_name(&block)
     load_clubs do
-      block.call(@@clubs) if block_given?
+      block.call(@@clubs_all) if block_given?
     end
   end
 
   def self.all_by_location(other_location, &block)
     load_clubs do
       if block_given?
-        clubs = @@clubs.sort { |x, y| x.distance_from_meters(other_location) <=> y.distance_from_meters(other_location) }
+        clubs = @@clubs_all.sort { |x, y| x.distance_from_meters(other_location) <=> y.distance_from_meters(other_location) }
         block.call(clubs)
       end
     end
@@ -39,16 +39,20 @@ class Club #< MotionDataWrapper::Model
 
   def self.find_by_id(id, &block)
     load_clubs do
-      filter_clubs = @@clubs.select { |club| club.id == id }
+      filter_clubs = @@clubs_all.select { |club| club.id == id }
       block.call(filter_clubs)
     end
   end
 
   def self.find_by_name(name, &block)
     load_clubs do
-      filter_clubs = @@clubs.select { |club| club.name == name }
+      filter_clubs = @@clubs_all.select { |club| club.name == name }
       block.call(filter_clubs)
     end
+  end
+
+  def club_name_full
+    "#{self.name}, #{self.state}"
   end
 
   def distance_from_meters(other_location)
@@ -64,7 +68,7 @@ class Club #< MotionDataWrapper::Model
   private
 
     def self.load_clubs(&block)
-      if @@clubs.empty?
+      if @@clubs_all.empty?
         client = AFMotion::Client.build("https://schedule.lifetimefitness.com/") do
           header "Accept", "application/json"
           response_serializer :json
@@ -76,7 +80,7 @@ class Club #< MotionDataWrapper::Model
                      :type => club["type"], :location => [club["lat"], club["lng"]])
             c.name = c.name.gsub(/Life Time Athletic,?/, '').gsub(/Life Time Fitness,?/, '').gsub(/Athletic,?/, '').gsub(/and LifeSpa,?/, '').gsub(/and Tennis,?/, '').strip
             c.type_description = c.type < 4 ? 'Life Time Fitness' : 'Life Time Athletic'
-            @@clubs << c
+            @@clubs_all << c
           end
           block.call if block_given?
         end
