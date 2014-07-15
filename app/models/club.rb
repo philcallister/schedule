@@ -1,6 +1,6 @@
 class Club #< MotionDataWrapper::Model
   
-  @@clubs_all = []
+  @@clubs_loaded = false
 
   # type
   # name
@@ -18,29 +18,29 @@ class Club #< MotionDataWrapper::Model
     end
   end
 
-  def self.force_load
-    load_clubs
+  def self.force_load(&block)
+    load_clubs do
+      block.call()
+    end
   end
 
   def self.all_by_name(&block)
     load_clubs do
-      block.call(@@clubs_all) if block_given?
+      block.call(@@clubs_all)
     end
   end
 
   def self.all_by_location(other_location, &block)
     load_clubs do
-      if block_given?
-        clubs = @@clubs_all.sort { |x, y| x.distance_from_meters(other_location) <=> y.distance_from_meters(other_location) }
-        block.call(clubs)
-      end
+      clubs = @@clubs_all.sort { |x, y| x.distance_from_meters(other_location) <=> y.distance_from_meters(other_location) }
+      block.call(clubs)
     end
   end
 
   def self.find_by_id(id, &block)
     load_clubs do
-      filter_clubs = @@clubs_all.select { |club| club.id == id }
-      block.call(filter_clubs)
+      club = @@clubs_all.detect { |c| c.id == id }
+      block.call(club)
     end
   end
 
@@ -68,7 +68,11 @@ class Club #< MotionDataWrapper::Model
   private
 
     def self.load_clubs(&block)
-      if @@clubs_all.empty?
+      if @@clubs_loaded
+        block.call
+      else
+        @@clubs_loaded = true
+        @@clubs_all = []
         client = AFMotion::Client.build("https://schedule.lifetimefitness.com/") do
           header "Accept", "application/json"
           response_serializer :json
@@ -82,10 +86,11 @@ class Club #< MotionDataWrapper::Model
             c.type_description = c.type < 4 ? 'Life Time Fitness' : 'Life Time Athletic'
             @@clubs_all << c
           end
-          block.call if block_given?
+
+          puts "!!!!! CLUBS: #{@@clubs_all.length}"
+
+          block.call
         end
-      else
-        block.call if block_given?
       end
     end
 

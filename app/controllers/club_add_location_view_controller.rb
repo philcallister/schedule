@@ -7,6 +7,7 @@ class ClubAddLocationViewController < UIViewController
 
   def loadView
     super
+    @markers = []
     camera = GMSCameraPosition.cameraWithLatitude(0, longitude: 0, zoom: 15)
     @map_view = GMSMapView.mapWithFrame(self.club_map_view.bounds, camera: camera)
     @map_view.myLocationEnabled = true
@@ -32,6 +33,11 @@ class ClubAddLocationViewController < UIViewController
     @current_location = newLocation
     @map_view.camera = GMSCameraPosition.cameraWithTarget(@current_location.coordinate, zoom:10)
     @location_manager.stopUpdatingLocation
+    Club.all_by_location(@current_location) do |clubs|
+      clubs.each do |club|
+        mapAddMarker(CLLocationCoordinate2DMake(club.location[0], club.location[1]), club.type_description, club.name)
+      end
+    end
   end
 
   def locationManager(manager, didFailWithError:error) 
@@ -46,7 +52,11 @@ class ClubAddLocationViewController < UIViewController
     # No more movement...
   end
 
+  def mapView(mapView, didTapInfoWindowOfMarker:marker)
+    puts "!!!!! Tap Tap..."
+  end
   
+
   ############################################################################
   # Actions
 
@@ -60,6 +70,7 @@ class ClubAddLocationViewController < UIViewController
 
   private
 
+    # @@@@@ Move this to an includable module
     def mapAddMarker(position, title="Title", snippet="Snippet")
       marker = GMSMarker.alloc.init
       marker.position = CLLocationCoordinate2DMake(position.latitude, position.longitude)

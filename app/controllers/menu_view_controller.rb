@@ -26,8 +26,8 @@ class MenuViewController < UIViewController
                 }
               ]
 
-    @clubs ||= [ { :type => 'Life Time Fitness', :name => 'Chanhassen, MN', :phone => '952-380-0303', :address => "2901 Corporate Place\nChanhassen, MN 55317", :location => [44.8613635, -93.595238] },
-                 { :type => 'Life Time Fitness', :name => 'Lakeville, MN', :phone => '952-985-8800', :address => "18425 Dodd Blvd\nLakeville, MN 55044", :location => [44.682659, -93.2515053] } ]
+    @clubs ||= [ { :type_description => 'Life Time Fitness', :name => 'Chanhassen, MN', :phone => '952-380-0303', :address => "2901 Corporate Place\nChanhassen, MN 55317", :location => [44.8613635, -93.595238] },
+                 { :type_description => 'Life Time Fitness', :name => 'Lakeville, MN', :phone => '952-985-8800', :address => "18425 Dodd Blvd\nLakeville, MN 55044", :location => [44.682659, -93.2515053] } ]
 
     #self.slidingViewController.setAnchorRightRevealAmount(280.0)
     self.slidingViewController.underLeftWidthLayout = ECFullWidth
@@ -82,7 +82,7 @@ class MenuViewController < UIViewController
     item = @menu[path.section][:items][path.row]
     club_id = item[:club_id] ? item[:club_id] : 0
     club = Club.new
-    club.type = @clubs[club_id][:type]
+    club.type_description = @clubs[club_id][:type_description]
     club.name = @clubs[club_id][:name]
     club.phone = @clubs[club_id][:phone]
     club.address = @clubs[club_id][:address]

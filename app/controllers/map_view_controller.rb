@@ -10,7 +10,7 @@ class MapViewController < UIViewController
     @map_view.settings.myLocationButton = true
     @map_view.delegate = self
     @markers = []
-    mapAddMarker(CLLocationCoordinate2DMake(self.club.location[0], self.club.location[1]), self.club.type, self.club.name)
+    mapAddMarker(CLLocationCoordinate2DMake(self.club.location[0], self.club.location[1]), self.club.type_description, self.club.name)
     self.view = @map_view
   end
 

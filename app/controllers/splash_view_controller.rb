@@ -11,12 +11,13 @@ class SplashViewController < UIViewController
 
   def viewDidAppear(animated)
     super
-    
+
     sleep 1
 
-    inc = self.storyboard.instantiateViewControllerWithIdentifier('InitialSlidingView')
-    self.presentViewController(inc, animated:true, completion:nil)
-
+    Club.force_load do
+      inc = self.storyboard.instantiateViewControllerWithIdentifier('InitialSlidingView')
+      self.presentViewController(inc, animated:true, completion:nil)
+    end
   end
 
 end

@@ -11,14 +11,14 @@ class ClubTableViewController < UITableViewController
     super
 
     if self.club.nil?
-      Club.find_by_id(11) { |c| self.club = c }
+      Club.find_by_id(16) { |c| self.club = c }
     end
   end
 
   def viewWillAppear(animated)
     if self.club.nil?
       self.club = Club.new
-      self.club.type = 'Life Time Fitness'
+      self.club.type_description = 'Life Time Fitness'
       self.club.name = 'Chanhassen, MN'
       self.club.phone = '952-380-0303'
       self.club.address = "2901 Corporate Place\nChanhassen, MN 55317"
@@ -71,7 +71,7 @@ class ClubTableViewController < UITableViewController
     case section
     when 0
       header = tableView.dequeueReusableCellWithIdentifier(ClubGroupCell.name)
-      header.populate(self.club.type, self.club.name)
+      header.populate(self.club.type_description, self.club.name)
     else
       header = tableView.dequeueReusableCellWithIdentifier(ClubGroupEmptyCell.name)
     end

@@ -9,9 +9,6 @@ class AppDelegate
     application.setStatusBarStyle(UIStatusBarStyleLightContent)
     GMSServices.provideAPIKey(GOOGLE_MAP_API_KEY)
 
-    # load up the clubs here so they'll be available
-    Club.force_load
-    
     true
   end
 

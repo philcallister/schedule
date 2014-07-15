@@ -8,6 +8,7 @@ class ClubAddViewController < UIViewController
   def viewDidLoad
     super
     Club.all_by_name { |clubs| @clubs = clubs }
+
     @filtered_clubs = []
 
     if (CLLocationManager.locationServicesEnabled)
