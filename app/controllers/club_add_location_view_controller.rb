@@ -5,9 +5,10 @@ class ClubAddLocationViewController < UIViewController
   # Outlets
   outlet :club_map_view, UIView
 
+  attr_accessor :delegate
+
   def loadView
     super
-    @markers = []
     camera = GMSCameraPosition.cameraWithLatitude(0, longitude: 0, zoom: 15)
     @map_view = GMSMapView.mapWithFrame(self.club_map_view.bounds, camera: camera)
     @map_view.myLocationEnabled = true
@@ -35,7 +36,7 @@ class ClubAddLocationViewController < UIViewController
     @location_manager.stopUpdatingLocation
     Club.all_by_location(@current_location) do |clubs|
       clubs.each do |club|
-        mapAddMarker(CLLocationCoordinate2DMake(club.location[0], club.location[1]), club.type_description, club.name)
+        Google::Geo.mapAddMarker(CLLocationCoordinate2DMake(club.location[0], club.location[1]), @map_view, club.type_description, club.name)
       end
     end
   end
@@ -64,22 +65,9 @@ class ClubAddLocationViewController < UIViewController
     self.dismissModalViewControllerAnimated(true)
   end
 
-
-  ############################################################################
-  # Internal
-
-  private
-
-    # @@@@@ Move this to an includable module
-    def mapAddMarker(position, title="Title", snippet="Snippet")
-      marker = GMSMarker.alloc.init
-      marker.position = CLLocationCoordinate2DMake(position.latitude, position.longitude)
-      marker.title = title
-      marker.snippet = snippet
-      marker.icon = GMSMarker.markerImageWithColor(UIColor.colorWithRed(236.0/255.0, green:96.0/255.0, blue:77.0/255.0, alpha:1.0))
-      marker.map = @map_view
-      @markers << marker
-      marker
-    end
+  def donePressed
+    self.dismissModalViewControllerAnimated(false)
+    delegate.dismissModalViewControllerAnimated(true)
+  end
 
 end

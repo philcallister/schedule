@@ -458,7 +458,7 @@
                                         <barButtonItem key="rightBarButtonItem" image="map-toolbar.png" id="qQV-vz-ypN">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <segue destination="M1d-S6-A9h" kind="modal" modalTransitionStyle="flipHorizontal" id="aIj-uJ-oAO"/>
+                                                <segue destination="M1d-S6-A9h" kind="modal" identifier="AddClubMapSegue" modalTransitionStyle="flipHorizontal" id="CFH-2g-jn7"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -572,7 +572,7 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="AGN-6U-8rp">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <action selector="donePressed" destination="u4F-db-nN8" id="qhF-Qv-Ts0"/>
+                                                <action selector="donePressed" destination="M1d-S6-A9h" id="lPR-bo-C2L"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" image="list.png" id="q7z-cp-SoU">

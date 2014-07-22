@@ -25,6 +25,15 @@ class ClubAddViewController < UIViewController
     super
   end
 
+  def prepareForSegue(segue, sender:sender)
+    vc = segue.destinationViewController
+
+    case segue.identifier
+    when 'AddClubMapSegue'
+      vc.delegate = self
+    end
+  end
+
 
   ############################################################################
   # Location Delegate
